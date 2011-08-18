@@ -48,7 +48,7 @@ module OpenStreetMaps
     end
 
     def http_request(url, opts)
-      EventMachine::HttpRequest.new(@base_uri + url,  {:proxy => {:host => '10.40.21.128', :port => 8888}}).aget(opts)
+      EventMachine::HttpRequest.new(@base_uri + url).aget(opts)
     end    
   end
 end
