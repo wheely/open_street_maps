@@ -39,13 +39,8 @@ module OpenStreetMaps
       http.callback do
         begin
           resources = Array.wrap(Yajl::Parser.parse(http.response))
-          locations = resources.map{|data| OpenStreetMaps::Location.new(data)}
-          #puts locations.inspect
-          #parsed["response"]["groups"].each{|group| venues += group["items"]}
-          succeed(locations)
+          succeed(resources.map{|data| OpenStreetMaps::Location.new(data)})
         rescue Exception => e
-          p $!.message
-          p $!.backtrace
           fail(e)
         end
       end
