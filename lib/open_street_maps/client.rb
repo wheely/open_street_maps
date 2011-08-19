@@ -1,7 +1,7 @@
 module OpenStreetMaps
   class Client
     include EventMachine::Deferrable
-    
+
     # Create a new OpenStreetMaps client
     #
     # @param [Hash] options Options
@@ -10,20 +10,20 @@ module OpenStreetMaps
       @default_opts = {:format => 'json', :addressdetails => 1}.merge(options)
       self
     end
-    
+
     # Get an address for a specified point (latitude and longitude)
     # @param [String] lat Latitude
     # @param [String] long Longitude
     # @param [Hash] options Options
     # @param options [String] :format Output format xml or json
-    # @param options [String] :json_callback 
-    # @param options [String] :accept-language Preferred language order for showing search 
+    # @param options [String] :json_callback
+    # @param options [String] :accept-language Preferred language order for showing search
     # results, overrides the browser value. Either uses standard rfc2616 accept-language
     # string or a simple comma separated list of language codes.
     def reverse_geocode(lat, lon, options={})
       request("/reverse", :query => {:lat => lat, :lon => lon}.merge(@default_opts).merge(options))
     end
-    
+
     # Gets a list of locations based on a query
     # @param [String] q Query
     # @param [Hash] options Options
@@ -59,7 +59,7 @@ module OpenStreetMaps
     end
 
     def http_request(url, opts)
-      EventMachine::HttpRequest.new(@base_uri + url).aget(opts)
-    end    
+      EventMachine::HttpRequest.new(@base_uri + url).get(opts)
+    end
   end
 end
