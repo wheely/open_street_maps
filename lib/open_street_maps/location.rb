@@ -1,8 +1,9 @@
 module OpenStreetMaps
   class Location
     attr_reader :place_id, :licence, :osm_type, :osm_id, :boundingbox,
-                :lat, :lon, :display_name, :class, :type, :icon, :address
-    
+                :lat, :lon, :display_name, :class, :type, :icon, :address,
+                :name
+
     def initialize(options={})
       @place_id = options['place_id']
       @licence  = options['licence']
@@ -16,6 +17,7 @@ module OpenStreetMaps
       @type     = options['type']
       @icon     = options['icon']
       @address  = options['address']
+      @name     = options['address'][@type]
       # Sample Address:
       #  {"house_number":"14",
       #           "road":"Speyerer Straße",
@@ -27,6 +29,6 @@ module OpenStreetMaps
       #       "postcode":"68163",
       #        "country":"Germany",
       #   "country_code":"de"}
-    end    
+    end
   end
 end

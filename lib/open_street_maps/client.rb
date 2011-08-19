@@ -59,7 +59,7 @@ module OpenStreetMaps
     end
 
     def http_request(url, opts)
-      EventMachine::HttpRequest.new(@base_uri + url).get(opts)
+      EM::Synchrony.sync EventMachine::HttpRequest.new(@base_uri + url).aget(opts)
     end
   end
 end
