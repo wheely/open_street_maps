@@ -18,7 +18,7 @@ GIT
 PATH
   remote: .
   specs:
-    openstreetmaps (0.0.1)
+    open_street_maps (0.0.1)
       em-http-request (>= 1.0.0.beta.4)
       em-synchrony (>= 0.3.0.beta.1)
       yajl-ruby
@@ -53,7 +53,7 @@ PLATFORMS
 DEPENDENCIES
   em-http-request!
   em-synchrony!
-  openstreetmaps!
+  open_street_maps!
   rack-test
   rr
   rspec

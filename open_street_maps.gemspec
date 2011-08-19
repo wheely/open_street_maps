@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "openstreetmaps/version"
+require "open_street_maps/version"
 
 Gem::Specification.new do |s|
-  s.name        = "openstreetmaps"
-  s.version     = BingMaps::VERSION
+  s.name        = "open_street_maps"
+  s.version     = OpenStreetMaps::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ivan Samsonov"]
   s.email       = ["ivan@wheely.com"]

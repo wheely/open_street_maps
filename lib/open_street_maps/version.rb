@@ -1,3 +1,3 @@
-module BingMaps
+module OpenStreetMaps
   VERSION = "0.0.1"
 end

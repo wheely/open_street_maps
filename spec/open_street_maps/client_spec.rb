@@ -5,7 +5,7 @@ describe OpenStreetMaps::Client do
   before(:each) do
     @client = OpenStreetMaps.new
   end
-  
+
   it "performs a reverse_geocode request" do
     result = nil
     EM.run do
@@ -17,7 +17,7 @@ describe OpenStreetMaps::Client do
     end
     result.size.should == 1
   end
-  
+
   it "performs a query request" do
     result = nil
     EM.run do

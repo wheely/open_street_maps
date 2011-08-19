@@ -8,6 +8,6 @@ module OpenStreetMaps
   end
 end
 
-require 'openstreetmaps/client'
-require 'openstreetmaps/location'
-require 'openstreetmaps/ext/array'
+require 'open_street_maps/client'
+require 'open_street_maps/location'
+require 'open_street_maps/ext/array'
