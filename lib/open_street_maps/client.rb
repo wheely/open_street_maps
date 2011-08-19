@@ -33,9 +33,9 @@ module OpenStreetMaps
       request("/search", :query => {:q => q}.merge(@default_opts).merge(options))
     end
 
-    def query_with_geocoding(lat, lon, geocode_options = {}, &callback)
+    def query_with_geocoding(query, lat, lon, geocode_options = {}, &callback)
       request("/reverse", :query => {:lat => lat, :lon => lon}.merge(@default_opts).merge(geocode_options)) do |locations|
-        options = yield locations
+        options = yield query, locations
         request("/search", :query => options.merge(@default_opts))
       end
     end

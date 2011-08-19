@@ -42,10 +42,10 @@ describe OpenStreetMaps::Client do
           result = locations
           EM.stop
         end
-        @client.query_with_geocoding('55.755786', '37.617633') do |locations|
+        @client.query_with_geocoding("airport", '55.755786', '37.617633') do |query, locations|
           location = locations.first
-          q = "airport #{location.address['state']}"
-          {:q => q, :countrycodes => location.address['country_code']}
+          query = "#{query},#{location.address['state']}"
+          {:q => query, :countrycodes => location.address['country_code']}
         end
       end
       result.size.should > 0
