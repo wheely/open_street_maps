@@ -33,13 +33,24 @@ module OpenStreetMaps
       request("/search", :query => {:q => q}.merge(@default_opts).merge(options))
     end
 
+    def query_with_geocoding(lat, lon, geocode_options = {}, &callback)
+      request("/reverse", :query => {:lat => lat, :lon => lon}.merge(@default_opts).merge(geocode_options)) do |locations|
+        options = yield locations
+        request("/search", :query => options.merge(@default_opts))
+      end
+    end
+
     def request(url, opts)
       http = http_request(url, opts)
       http.errback { fail(Exception.new("An error occured in the HTTP request: #{http.errors}")) }
       http.callback do
         begin
-          resources = Array.wrap(Yajl::Parser.parse(http.response))
-          succeed(resources.map{|data| OpenStreetMaps::Location.new(data)})
+          resources = Array.wrap(Yajl::Parser.parse(http.response)).map{|data| OpenStreetMaps::Location.new(data)}
+          if block_given?
+            yield resources
+          else
+            succeed(resources)
+          end
         rescue Exception => e
           fail(e)
         end

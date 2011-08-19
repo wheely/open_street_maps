@@ -6,27 +6,49 @@ describe OpenStreetMaps::Client do
     @client = OpenStreetMaps.new
   end
 
-  it "performs a reverse_geocode request" do
-    result = nil
-    EM.run do
-      @client.callback do |locations|
-        result = locations
-        EM.stop
+  describe "#reverse_geocode" do
+    it "performs a reverse_geocode request" do
+      result = nil
+      EM.run do
+        @client.callback do |locations|
+          result = locations
+          EM.stop
+        end
+        @client.reverse_geocode('49.468124', '8.48144')
       end
-      @client.reverse_geocode('49.468124', '8.48144')
+      result.size.should == 1
     end
-    result.size.should == 1
   end
 
-  it "performs a query request" do
-    result = nil
-    EM.run do
-      @client.callback do |locations|
-        result = locations
-        EM.stop
+  describe "#query" do
+    it "performs a query request" do
+      result = nil
+      EM.run do
+        @client.callback do |locations|
+          result = locations
+          EM.stop
+        end
+        @client.query('airport,moscow')
       end
-      @client.query('Bahnhofstrasse, Zurich')
+      result.size.should > 0
     end
-    result.size.should > 1
-  end  
+  end
+
+  describe "#query_with_geocoding" do
+    it "combines detecting current address and querying" do
+      result = nil
+      EM.run do
+        @client.callback do |locations|
+          result = locations
+          EM.stop
+        end
+        @client.query_with_geocoding('55.755786', '37.617633') do |locations|
+          location = locations.first
+          q = "airport #{location.address['state']}"
+          {:q => q, :countrycodes => location.address['country_code']}
+        end
+      end
+      result.size.should > 0
+    end
+  end
 end
