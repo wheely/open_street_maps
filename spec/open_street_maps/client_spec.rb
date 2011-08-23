@@ -9,7 +9,7 @@ describe OpenStreetMaps::Client do
   describe "#reverse_geocode" do
     it "performs a reverse_geocode request" do
       result = nil
-      EM.run do
+      EM.synchrony do
         @client.callback do |locations|
           result = locations
           EM.stop
@@ -23,7 +23,7 @@ describe OpenStreetMaps::Client do
   describe "#query" do
     it "performs a query request" do
       result = nil
-      EM.run do
+      EM.synchrony do
         @client.callback do |locations|
           result = locations
           EM.stop
@@ -37,7 +37,7 @@ describe OpenStreetMaps::Client do
   describe "#query_with_geocoding" do
     it "combines detecting current address and querying" do
       result = nil
-      EM.run do
+      EM.synchrony do
         @client.callback do |locations|
           result = locations
           EM.stop
