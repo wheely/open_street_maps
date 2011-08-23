@@ -1,8 +1,8 @@
 module OpenStreetMaps
   class Location
     attr_reader :place_id, :licence, :osm_type, :osm_id, :boundingbox,
-                :lat, :lon, :display_name, :class, :type, :icon, :address,
-                :name
+                :lat, :lon, :display_name, :location_class, :type, :icon,
+                :address, :name
 
     def initialize(options={})
       @place_id = options['place_id']
@@ -13,7 +13,7 @@ module OpenStreetMaps
       @lat      = options['lat']
       @lon      = options['lon']
       @display_name = options['display_name']
-      @class    = options['class']
+      @location_class    = options['class']
       @type     = options['type']
       @icon     = options['icon']
       @address  = options['address']
